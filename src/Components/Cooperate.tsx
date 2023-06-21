@@ -6,14 +6,14 @@ const Cooperate = () => {
     <>
      <HStack w="100%" h="auto" justifyContent={"space-between"} p={"10px 20px"} >
             <Text fontSize={"1.2em"}>Co-operative society opted and qualify for section 115BAD</Text>
-            <Select>
+            <Select w="30%">
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </Select>
         </HStack>
         <HStack w="100%" h="auto" justifyContent={"space-between"} p={"10px 20px"} >
             <Text fontSize={"1.2em"}>Co-operative society opted and qualify for section 115BAE</Text>
-            <Select>
+            <Select w="30%">
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </Select>

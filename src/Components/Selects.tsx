@@ -1,9 +1,16 @@
 import React from 'react'
-import { HStack, Input, Text, Checkbox} from "@chakra-ui/react"
+import { HStack, Input, Text, Checkbox, Select} from "@chakra-ui/react"
 
 const Selects = () => {
   return (
     <>
+    <HStack w="100%" h="auto" justifyContent={"space-between"} p={"10px 20px"} >
+            <Text fontSize={"1.2em"}>Co-operative society opted and qualify for section 115BAD</Text>
+            <Select w="30%">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </Select>
+        </HStack>
     <HStack w="100%" h="auto" justifyContent={"space-between"} p={"10px 20px"} >
             <Text fontSize={"1.2em"}>Net Taxable Income</Text>
             <Input w="30%" bgColor={"white"} type='number' border={"1px solid #333"}  textAlign={"right"} name='BasicSalary'  ></Input>
