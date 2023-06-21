@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { HStack, Input , Text, Checkbox, Select, Button} from "@chakra-ui/react"
+import { HStack, Input , Text,  Select, Button, useToast} from "@chakra-ui/react"
 import IncomeHP from './IncomeHP'
 import IncomeOS from './IncomeOS'
 
@@ -11,7 +11,7 @@ interface Data{
     Deduction:string
   
 }
-const Individual = () => {
+const Individual = ({handleCalc}:{handleCalc:(e:number)=>void}) => {
     const [ihouseRent,setIHouseRent]= useState<boolean>(false)
     const [iothersorce,setOtherSorce]= useState<boolean>(false)
     const [deduct,setDeduct]= useState<boolean>(false)
@@ -22,12 +22,15 @@ const Individual = () => {
     const [totaltax,setTotalTax] = useState<number>(0)
     const [edutax,setEduTax] = useState<number>(0)
     const [netIncome,setNetIncome] = useState<number>(0)
-    const [relif,setRelif] = useState(0)
+    const [relief,setRelief] = useState("")
+    const [tds,setTds] = useState("")
+    const [assessedTax,setAssesedTax] = useState(0)
     const [userData,setUserData] = useState({
         ISalary:0,
         CapitalGain:0,
         Profit:0,
     })
+   
    let temp=0
    let temp2=0
    let temp3=0
@@ -66,11 +69,15 @@ useEffect(()=>{
     }
 },[netIncome])
 
+
+
 useEffect(()=>{
     setTax(temp)
     setEduTax(temp2)
     setTotalTax(temp3)
-},[netIncome])
+    setAssesedTax(temp3 - (Number(relief) + Number(tds)))
+    handleCalc(assessedTax)
+},[netIncome,relief,tds])
 
   return (
     <>
@@ -166,15 +173,15 @@ useEffect(()=>{
         </HStack>
         <HStack w="100%" h="auto" justifyContent={"space-between"} p={"10px 20px"} >
             <Text fontSize={"1.2em"}>Relief</Text>
-            <Input type={"number"} w="30%" bgColor={"white"} border={"1px solid #333"} readOnly  textAlign={"right"} ></Input>
+            <Input type={"number"} w="30%" bgColor={"white"} border={"1px solid #333"} onChange={(e)=> setRelief(e.target.value)} textAlign={"right"} ></Input>
         </HStack>
         <HStack w="100%" h="auto" justifyContent={"space-between"} p={"10px 20px"} bgColor={"#e6e6e6"} >
             <Text fontSize={"1.2em"}>TDS/TCS/MAT (AMT) Credit Utilized</Text>
-            <Input type={"number"} w="30%" bgColor={"white"} border={"1px solid #333"} readOnly  textAlign={"right"} ></Input>
+            <Input type={"number"} w="30%" bgColor={"white"} border={"1px solid #333"} onChange={(e)=> setTds(e.target.value)}  textAlign={"right"} ></Input>
         </HStack>
         <HStack w="100%" h="auto" justifyContent={"space-between"} p={"10px 20px"} >
             <Text fontSize={"1.2em"}>Assessed Tax</Text>
-            <Input type={"number"} w="30%" bgColor={"white"} border={"1px solid #333"} readOnly  textAlign={"right"} ></Input>
+            <Input type={"number"} w="30%" bgColor={"white"} border={"1px solid #333"} readOnly value={assessedTax}  textAlign={"right"} ></Input>
         </HStack>
     </>
   )
