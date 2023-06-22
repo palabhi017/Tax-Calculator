@@ -56,12 +56,12 @@ useEffect(()=>{
         temp3=0
     }else if(Number(netIncome)<=500000){
      
-        temp=Number(netIncome)*.05
+        temp=Number(netIncome-250000)*.05
         temp2= temp*.04
         temp3=temp+temp2
     }else if(netIncome<=1000000){
         
-        temp=12500 + netIncome*.2
+        temp=12500 + Number(netIncome-500000)*.2
         temp2=temp*.04
         temp3=temp+temp2
     }else{

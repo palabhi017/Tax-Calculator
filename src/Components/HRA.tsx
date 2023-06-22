@@ -64,20 +64,20 @@ const HRA = () => {
             if(+userData.HRAReceived <= +(userData.BasicSalary+userData.Commission)/2 && +userData.HRAReceived <= +(Number(userData.RentPaid)-Number(userData.BasicSalary)*0.10)){
                 setUserData((prevUserData: Data) => ({
                     ...prevUserData,
-                     ExemptedHRA: Number(userData.HRAReceived),
+                     ExemptedHRA: Math.floor(Number(userData.HRAReceived)),
                     }));
                    
             }else if(+(userData.BasicSalary+userData.Commission)/2 <= +userData.HRAReceived && +(userData.BasicSalary+userData.Commission)/2 <= +(Number(userData.RentPaid)-Number(userData.BasicSalary)*0.10) ){
                 setUserData((prevUserData: Data) => ({
                     ...prevUserData,
-                     ExemptedHRA: (Number(userData.BasicSalary) + Number(userData.Commission))/2,
+                     ExemptedHRA: Math.floor((Number(userData.BasicSalary) + Number(userData.Commission))/2),
                      
                   }));
                
             }else{
                 setUserData((prevUserData: Data) => ({
                     ...prevUserData,
-                     ExemptedHRA: +userData.RentPaid - (Number(userData.DA)+ Number(userData.BasicSalary))*.1,
+                     ExemptedHRA: Math.floor(+userData.RentPaid - (Number(userData.DA)+ Number(userData.BasicSalary))*.1),
                   
                   }));
                  
@@ -86,19 +86,19 @@ const HRA = () => {
             if(+userData.HRAReceived <= +(userData.BasicSalary+userData.Commission)*.4 && +userData.HRAReceived <= +(Number(userData.RentPaid)-Number(userData.BasicSalary)*0.10)){
                 setUserData((prevUserData: Data) => ({
                     ...prevUserData,
-                     ExemptedHRA: Number(userData.HRAReceived),
+                     ExemptedHRA: Math.floor(Number(userData.HRAReceived)),
                     
                   }));
             }else if(+(userData.BasicSalary+userData.Commission)*.4 <= +userData.HRAReceived && +(userData.BasicSalary+userData.Commission)*.4 <= +(Number(userData.RentPaid)-Number(userData.BasicSalary)*0.10) ){
                 setUserData((prevUserData: Data) => ({
                     ...prevUserData,
-                     ExemptedHRA: (Number(userData.BasicSalary)+ Number(userData.Commission))*.4,
+                     ExemptedHRA: Math.floor((Number(userData.BasicSalary)+ Number(userData.Commission))*.4),
                      
                   }));
             }else{
                 setUserData((prevUserData: Data) => ({
                     ...prevUserData,
-                     ExemptedHRA: +userData.RentPaid - (Number(userData.DA)+ Number(userData.BasicSalary))*.1,
+                     ExemptedHRA: Math.floor(+userData.RentPaid - (Number(userData.DA)+ Number(userData.BasicSalary))*.1),
                     
                     
                   }));
