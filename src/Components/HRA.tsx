@@ -1,6 +1,8 @@
 import React,{useEffect, useState} from 'react'
 import {Box, HStack, Input, VStack,Text, Checkbox, Button} from "@chakra-ui/react"
 
+// I am using Chakra-ui for styling.
+
 interface Data{
     BasicSalary: string,
     DA: string,
@@ -12,8 +14,13 @@ interface Data{
   
 }
 
+// This component is created to calculate HRA (House Rent Allowance)
+
 const HRA = () => {
+  //  This state is created for storing final tax.
     const [taxable,setTaxable] = useState<number>(0)
+  
+  // This state is an object which is storing user's input.
     const [userData, setUserData] = useState<Data>({
         BasicSalary:'',
         DA: '',
@@ -24,8 +31,12 @@ const HRA = () => {
         ExemptedHRA: 0,
        
       });
-    
+
+  // This function is handling changes in inputs and storing that inputs in state.
+  // If user changes the input this function will run.
       const handleChange = (e:any) => {
+    
+      // This condition is applied to handle checkbox and other inputs.
         if(e.target.name==="metrocity"){
             setUserData((prevUserData: Data) => ({
                 ...prevUserData,
@@ -41,7 +52,14 @@ const HRA = () => {
        
       };
 
+// This function will run when user click on calculate button.
+// This function is calculating exempted HRA and storing the result in state.
+
+// I am using this formula in below function To calculate the Exempted House Rent Allowance:
+// Exempted HRA = Minimum of the following three amounts
       const handleSubmit=()=>{
+
+    // If user is from metro city this condition will run . if Not else condition will run.
         if(userData.metrocity===true){
             if(+userData.HRAReceived <= +(userData.BasicSalary+userData.Commission)/2 && +userData.HRAReceived <= +(Number(userData.RentPaid)-Number(userData.BasicSalary)*0.10)){
                 setUserData((prevUserData: Data) => ({
@@ -89,6 +107,7 @@ const HRA = () => {
        
       }
 
+// this function is created to reset all the fields.
 const handleReset=()=>{
     setUserData({
         BasicSalary: '',
@@ -102,6 +121,12 @@ const handleReset=()=>{
       })
       setTaxable(0)
 }
+
+// In this useEffect function i am calculating taxable HRA and storing in a state.
+
+// I am using this formula To calculate the Taxable House Rent Allowance:
+// Taxable HRA = Actual HRA Received - Exempted HRA
+
   useEffect(()=>{
     setTaxable(Number(userData.HRAReceived)-userData.ExemptedHRA)
   },[userData.ExemptedHRA])
