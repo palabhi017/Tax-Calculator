@@ -1,6 +1,8 @@
 import React from 'react'
 import { HStack, Input, Text, Checkbox, Select} from "@chakra-ui/react"
 
+// This is a calculator for cooperate category.
+
 const Cooperate = () => {
   return (
     <>

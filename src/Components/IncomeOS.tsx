@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { HStack, Input, Text} from "@chakra-ui/react"
 
+// This component is created for getting user input and calculating "Income from other Source" based on the inputs.
+
+
 const IncomeOS = ({data}:{data:(amount:number)=>void}) => {
     const [interest,setInterest] = useState(0)
     const [commission,setCommission] = useState(0)

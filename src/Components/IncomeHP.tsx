@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { HStack, Input, Text} from "@chakra-ui/react"
 
+// This component is created for getting user input and 
+//calculating "Income from house property" based on the inputs.
+
+
 const IncomeHP = ({data}:{data:(amount:number)=>void}) => {
     const [totalIncome,settotalIncome] = useState(0)
     const [municipalTaxes,setmunicipalTaxes] = useState(0)

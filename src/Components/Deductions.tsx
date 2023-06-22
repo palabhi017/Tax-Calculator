@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { HStack, Input, Text} from "@chakra-ui/react"
 
+// This component is created for getting user input and calculating deduction based on the inputs.
+
+
 const Deductions = ({data}:{data:(amount:number)=>void}) => {
     const [contribution,setContribution] = useState(0)
     const [agnipathScheme,setAgnipathScheme] = useState(0)

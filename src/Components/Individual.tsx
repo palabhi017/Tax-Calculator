@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { HStack, Input , Text,  Select, Button, useToast} from "@chakra-ui/react"
+import { HStack, Input , Text,  Select, Button} from "@chakra-ui/react"
 import IncomeHP from './IncomeHP'
 import IncomeOS from './IncomeOS'
 
-interface Data{
-    ISalary:string,
-    IProperty:string,
-    IOtherS:string,
-    Profit:string,
-    Deduction:string
-  
-}
+// This is a calculator for individual category.
+
+
 const Individual = ({handleCalc}:{handleCalc:(e:number)=>void}) => {
     const [ihouseRent,setIHouseRent]= useState<boolean>(false)
     const [iothersorce,setOtherSorce]= useState<boolean>(false)
@@ -30,20 +25,29 @@ const Individual = ({handleCalc}:{handleCalc:(e:number)=>void}) => {
         CapitalGain:0,
         Profit:0,
     })
-   
+   // This variables for storing calculated data and then they are passing to the state.
    let temp=0
    let temp2=0
    let temp3=0
+
+   // This function is handling user input and storing in states.
    const handleChange=(e:any)=>{
     const {name,value}= e.target
     setUserData(prev => ( {...prev, [name]: value}))
    }
 
-
+// This useEffect for calculating and updating net Income. This function will run when its dependecies 
+// state will change.
 useEffect(()=>{
     setNetIncome((Number(userData.ISalary) + Number(incomeHP) + Number(incomeOS) + Number(userData.Profit) + Number(userData.CapitalGain))- Number(incomeD))
    
 },[userData,incomeD,incomeOS,incomeHP])
+
+// In this function i am calculating applicable tax for that i am using this formula.
+// Up to ₹2,50,000: No tax
+// ₹2,50,001 to ₹5,00,000: 5% of (Total Income - ₹2,50,000)
+// ₹5,00,001 to ₹10,00,000: ₹12,500 + 20% of (Total Income - ₹5,00,000)
+// Above ₹10,00,000: ₹1,12,500 + 30% of (Total Income - ₹10,00,000)
 
 useEffect(()=>{
     if(netIncome<= 250000){
@@ -70,7 +74,8 @@ useEffect(()=>{
 },[netIncome])
 
 
-
+// with this function i am manipulating input boxes values.
+// and updating current value based on inputs.
 useEffect(()=>{
     setTax(temp)
     setEduTax(temp2)

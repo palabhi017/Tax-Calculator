@@ -1,13 +1,18 @@
-import { Box, HStack, Input, VStack,Text, Select,Button, useToast} from '@chakra-ui/react'
+import { Box, HStack, VStack,Text, Select,Button, useToast} from '@chakra-ui/react'
 import React, { useState } from 'react'
 import Selects from './Selects'
 import Individual from './Individual'
 import Cooperate from './Cooperate'
 
+// This component is created of calculate ATC (advance tax )
+// In this component i am displaing different different child components based on the condition.
+// if user select individual category then that component will be rendered.  
 const ATC = () => {
   const [category,SetCategory] = useState<string>("Individual")
   const [assessedTax,setAssessedTax] = useState(0)
   let toast = useToast()
+
+// This function is to show user his total tax. when user click on calculate button.
   const handleCalc =()=>{
     if(assessedTax<=10000){
         toast({
@@ -48,6 +53,7 @@ const ATC = () => {
             <option value="COS">Co-Operative Society</option>
            </Select>
         </HStack>
+      {/* here i am doing condition redering */}
         {category===""? <Selects/>:"" }
 
        {category==="Individual"? <Individual handleCalc={(e:number)=> setAssessedTax(e)}/>:"" }
